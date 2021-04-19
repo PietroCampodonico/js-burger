@@ -1,43 +1,44 @@
 window.addEventListener("load", function(){
 
-    subTotal()
+    subTotal();
 })
 
 var submitBtn = document.getElementById("button");
 var burgerCustomName = document.getElementsByClassName("name-burger");
+var couponsValidi = ["asda1566", "gdfg1651", "werw0616", "qweqw6548",]
 var sum = 50;
 
 
 function subTotal() {
     submitBtn.addEventListener("click", function(){
         var ingredientsList = document.querySelectorAll("input.ingredient-checkbox");
-        console.log(ingredientsList)
 
-        
-        //FACCIO UN CICLO FOR CON UN IF PER OGNI ELEMENTO DELLA LISTA
-        /*
-        for (var i = 0; i < ingredientsList.length; i++) {
+        if (!burgerCustomName.value) {
+            alert("inserire il nome dell'hamburger personalizzato!")
 
-            
-           if (ingredientsList[i].checked) {
-               sum += parseInt(ingredientsList[i].value);
-           }
-        } 
-        */  
-
-           //oppure scrivo una funzione generica e la richiamo nel ciclo
-
-           function addToSum(sommaFinale, ingrediente) {
-                if (ingrediente.checked) {
-                    sommaFinale += parseInt(ingrediente.value);
-                }
-           }
-
-           for (var i = 0; i < ingredientsList.length; i++) {
-              
-                sum = addToSum(sum, ingredientsList[i])
-           }
+        } else {
+            for (var i = 0; i < ingredientsList.length; i++) {
+                
+                //FACCIO UN CICLO FOR CON UN IF PER OGNI ELEMENTO DELLA LISTA
+                /*if (ingredientsList[i].checked) {
+                    sum += parseInt(ingredientsList[i].value);
+                }*/
+    
+             //OPPURE SCRIVO UNA FUNZIONE GENERICA CHE RICHIAMO NEL CICLO
+               
+               sum = addToSum(sum, ingredientsList[i])
+            } 
+        }    
         
         console.log(sum)
     })  
+
+}
+
+function addToSum(sommaPrecedente, elementoLista) {
+    if (elementoLista.checked) {
+        sommaPrecedente += parseInt(elementoLista.value);
+    }
+
+    return sommaPrecedente
 }
